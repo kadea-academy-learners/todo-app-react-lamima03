@@ -1,4 +1,12 @@
-import React, { useReducer } from 'react';
+import React, { useReducer } from 'react'
+
+const App: React.FC = () => {
+  return (
+    <div>
+      <TodoList task="Ma Liste de Tâches" /> {/* Passer la propriété task ici */}
+    </div>
+  );
+};
 
 // Interface pour représenter une tâche
 interface Todo {
@@ -19,6 +27,7 @@ interface Action {
   nextDraft?: string; // Texte de la tâche
   id?: number; // ID de la tâche
 }
+
 
 // Fonction pour créer l'état initial
 function createInitialState(): State {
@@ -71,7 +80,7 @@ function reducer(state: State, action: Action): State {
       localStorage.setItem('todos', JSON.stringify(updatedTodos));
       return {
         ...state,
-        todos: updatedTodos, // Retourne la nouvelle liste de tâches
+       todos: updatedTodos, // Retourne la nouvelle liste de tâches
       };
     }
     case 'edit_todo': {
@@ -84,7 +93,6 @@ function reducer(state: State, action: Action): State {
       return {
         ...state,
         todos: JSON.parse(localStorage.getItem('todos') || '[]'), // Charger les tâches depuis le Local Storage
-        
       };
     }
     default:
@@ -143,8 +151,7 @@ const TodoList: React.FC<TodoListProps> = ({ task }) => {
                 className="mr-2"
               />
               <span className={item.completed ? 'line-through text-gray-500' : ''}>
-                {item.text};
-                
+                {item.text}
               </span>
             </label>
             <div>
@@ -170,4 +177,4 @@ const TodoList: React.FC<TodoListProps> = ({ task }) => {
   );
 };
 
-export default TodoList;
+export default App;
